@@ -1,0 +1,61 @@
+<template>
+<!--
+    组件使用：
+  -->
+  <div>
+    <el-card class="box-card item" v-for="(item,idx) in cardData" :key="idx">
+      <div slot="header" class="clearfix">
+        <span class="title" v-if="item.title">{{item.title}}</span>
+        <span style="float:right" class="time" v-if="item.time">{{item.time}}</span>
+      </div>
+      <div class="text" v-if="item.content">{{item.content}}</div>
+    </el-card>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      msg: "123"
+    };
+  },
+  props:{
+      cardData:Array
+  }
+};
+</script>
+<style scoped>
+.box-card {
+  width: 100%;
+}
+.text {
+  font-size: 14px;
+  color: #999aaa;
+  max-height: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+.time{
+    color: #5f6471;
+    font-size: 13px;
+}
+.title {
+  font-weight: bold;
+  font-size: 20px;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+</style>
