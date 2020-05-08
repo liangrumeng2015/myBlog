@@ -18,6 +18,9 @@ var blogArticleSchema = new Schema({
     },
     article_end_time:{  // 文章最后一次修改时间
         type:String,
+    },
+    article_type:{    // 文章类型   1发布   2草稿
+        type:Number
     }
 })
 var blogArticleModel = mongoose.model('blogArticle',blogArticleSchema);
