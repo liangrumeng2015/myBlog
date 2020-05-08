@@ -4,6 +4,10 @@ import router from './router'
 Vue.config.productionTip = false
 import './config/elementUI'
 
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
 new Vue({
   router,
   render: h => h(App)

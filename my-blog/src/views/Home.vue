@@ -26,6 +26,7 @@ import Pagination from '@/components/Pagination'
 export default {
   data(){
     return{
+      activeKey:0,
       msg:'123',
       total:100,   // 动态文章总个数
       cardData:[   // 文章列表
