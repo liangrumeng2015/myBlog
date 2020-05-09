@@ -15,11 +15,11 @@ router.get('/', function (req, res, next) {
 router.post('/articleList.do', async (req, res, next) => {
     let currentPage = req.body.page; // 显示第几页的数据
     let articleList, allList;
-    allList = await blogArticleModel.find({});
+    allList = await blogArticleModel.find({}).sort({article_end_time:-1});
     if (!currentPage) { // 查询所有
         articleList = allList;
     } else { // 分页查询,默认10条分页
-        articleList = await blogArticleModel.find({}).skip((currentPage - 1) * 10).limit(10);
+        articleList = await blogArticleModel.find({}).skip((currentPage - 1) * 10).limit(10).sort({article_end_time:-1});
     }
     res.send({
         success: true,
