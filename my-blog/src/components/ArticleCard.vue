@@ -3,12 +3,12 @@
     组件使用：
   -->
   <div>
-    <el-card class="box-card item" v-for="(item,idx) in cardData" :key="idx">
-      <div slot="header" class="clearfix">
-        <span class="title" v-if="item.title">{{item.title}}</span>
-        <span style="float:right" class="time" v-if="item.time">{{item.time}}</span>
+    <el-card class="box-card item" v-for="(item,idx) in articleList" :key="idx">
+      <div slot="header" class="clearfix" >
+        <span class="title" v-if="item.article_title">{{item.article_title}}</span>
+        <span style="float:right" class="time" v-if="item.article_first_time">{{item.article_first_time}}</span>
       </div>
-      <div class="text" v-if="item.content">{{item.content}}</div>
+      <div class="text" v-if="item.article_content" @click="toArticleDetail(item)">{{item.article_content}}</div>
     </el-card>
   </div>
 </template>
@@ -20,7 +20,13 @@ export default {
     };
   },
   props:{
-      cardData:Array
+      articleList:Array
+  },
+  methods:{
+    toArticleDetail(item){
+      const id = item._id
+      this.$router.push({path:'/articledetail',query:{id}})
+    }
   }
 };
 </script>

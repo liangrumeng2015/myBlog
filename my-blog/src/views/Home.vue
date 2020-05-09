@@ -5,14 +5,15 @@
         <span>是西柚呀！的博客</span>
       </el-header>
       <el-container class="container">
-        <!-- <el-aside width="300px" class="aside">
+        <el-aside width="300px" class="aside">
           <v-ArticleCard :cardData = leftData />
-        </el-aside> -->
+          <div v-if="total">文章总数{{total}}</div>
+        </el-aside>
         <el-main class="main">
           <!-- 文章 -->
-          <v-ArticleCard :cardData = cardData />
+          <v-ArticleCard :articleList = articleList />
           <!-- 分页 -->
-          <v-Pagination :total = total />
+          <v-Pagination :total = total @currentPage="currentPageFn" />
         </el-main>
       </el-container>
     </el-container>
@@ -22,24 +23,16 @@
 <script>
 import ArticleCard from '@/components/ArticleCard'
 import Pagination from '@/components/Pagination'
+import {reqArticleList} from '@/config/api.js'
 // @ is an alias to /src
 export default {
   data(){
     return{
       activeKey:0,
       msg:'123',
-      total:100,   // 动态文章总个数
-      cardData:[   // 文章列表
-        {
-        title:'文章1标题',
-        time:'2020年05月07日14:32:19',
-        content:'文章内容内容内容1'
-      },{
-        title:'文章2标题',
-        time:'2020年05月07日14:32:19',
-        content:'文章内容内容内容2'
-      }
-      ],
+      total:0,   // 动态文章总个数
+      articleList:[],  // 文章列表
+      currentPage:1,   // 初始化显示第一页
       leftData:[
         {
           title:'归档',
@@ -52,6 +45,25 @@ export default {
   components:{
     'v-ArticleCard':ArticleCard,
     'v-Pagination':Pagination
+  },
+  mounted(){
+    this.getArticleList(this.currentPage);
+  },
+  methods:{
+    // 获取文章列表
+    async getArticleList(page){
+      const result = await reqArticleList({page})
+      if(result.success){
+        const {articleList,total} = result
+        this.articleList =  articleList
+        this.total = total
+      }
+    },
+    // 分页触发事件
+    currentPageFn(val){
+      this.currentPage = val;
+      this.getArticleList(val);
+    }
   }
 };
 </script>
