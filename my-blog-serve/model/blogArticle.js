@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var blogArticleSchema = new Schema({
     article_title:{  // 文章标题
         type:String,
-        unique:true
+        index: {unique: true}
     },
     article_content:{    // 文章内容
         type:String,
