@@ -6,13 +6,14 @@
     <el-card class="box-card item" v-for="(item,idx) in articleList" :key="idx">
       <div slot="header" class="clearfix" >
         <span class="title" v-if="item.article_title">{{item.article_title}}</span>
-        <span style="float:right" class="time" v-if="item.article_first_time">{{item.article_first_time}}</span>
+        <span style="float:right" class="time" v-if="item.article_first_time">{{changeTime(item.article_first_time)}}</span>
       </div>
       <div class="text" v-if="item.article_content" @click="toArticleDetail(item)">{{item.article_content}}</div>
     </el-card>
   </div>
 </template>
 <script>
+import {changeTimeStamp} from '@/tools/tools'
 export default {
   data() {
     return {
@@ -22,10 +23,13 @@ export default {
   props:{
       articleList:Array
   },
-  methods:{
+    methods:{
     toArticleDetail(item){
       const id = item._id
       this.$router.push({path:'/articledetail',query:{id}})
+    },
+    changeTime(val){
+       return changeTimeStamp(val)
     }
   }
 };

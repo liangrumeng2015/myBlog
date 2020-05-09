@@ -1,12 +1,13 @@
 <template>
     <div>
         <div v-if="articleInfo.article_title">文章标题:{{articleInfo.article_title}}</div>
-        <div v-if="articleInfo.article_first_time">发布时间：{{articleInfo.article_first_time}}</div>
-        <div v-if="articleInfo.article_content">{{articleInfo.article_content}}</div>
+        <div v-if="articleInfo.article_first_time">发布时间：changeTimeStamp({{articleInfo.article_first_time}})</div>
+        <div v-if="articleInfo.article_content" v-html="articleInfo.article_content"></div>
     </div>
 </template>
 <script>
 import { reqArticleById } from '@/config/api'
+import { changeTimeStamp } from '@/tools/tools'
 export default {
     data(){
         return{
@@ -18,6 +19,7 @@ export default {
     mounted(){
         this.currendArticleId = this.$route.query.id
         this.getArticleById(this.$route.query.id)
+        console.log(changeTimeStamp(1589010823605))
     },
     methods:{
         async getArticleById(id){
