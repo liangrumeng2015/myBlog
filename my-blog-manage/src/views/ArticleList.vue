@@ -6,13 +6,13 @@
     <el-table-column prop="operate" label="操作">
         <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData)"
+          @click.native.prevent="editorRow(scope.$index, articleListData)"
           type="primary"
           size="small">
           编辑
         </el-button>
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData)"
+          @click.native.prevent="deleteRow(scope.$index, articleListData)"
           type="danger"
           size="small">
           删除
@@ -43,6 +43,11 @@ export default {
           }else{
               console.log('文章列表获取失败')
           }
+      },
+      // 编辑文章
+      editorRow(idx,arr){
+        const id = arr[idx]._id;
+        this.$router.push({path:'/',query:{id}})
       }
   }
 };

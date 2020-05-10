@@ -29,8 +29,27 @@ export default {
   components: {
     quillEditor
   },
-  mounted() {
-    console.log(this.content);
+  props:{
+    htmlcontent:String
+  },
+  beforeCreate(){
+    console.log('child  beforeCreate')
+  },
+  created(){
+    console.log('child created')
+  },
+  beforeUpdate(){
+    console.log('child beforeUpdate')
+  },
+  updated() {
+    console.log('child updated')
+  },
+  mounted(){
+    console.log('child mounted')
+    console.log('编辑器里面的====',this.htmlcontent)
+    if(this.htmlcontent){   // 用于编辑 
+      this.content = this.htmlcontent
+    }
   },
   computed: {
     editor() {
@@ -51,7 +70,6 @@ export default {
     },
     onEditorChange() {
       // 内容改变事件
-      console.log("onEditorChange", this.content);
       this.$emit('editorContent',this.content)
     },
     // 取消
