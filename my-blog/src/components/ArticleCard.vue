@@ -8,7 +8,7 @@
         <span class="title" v-if="item.article_title">{{item.article_title}}</span>
         <span style="float:right" class="time" v-if="item.article_first_time">{{changeTime(item.article_first_time)}}</span>
       </div>
-      <div class="text" v-if="item.article_content" @click="toArticleDetail(item)">{{item.article_content}}</div>
+      <div class="text" v-if="item.article_content" @click="toArticleDetail(item)" v-html="item.article_content"></div>
     </el-card>
   </div>
 </template>

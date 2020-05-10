@@ -14,5 +14,6 @@ export const changeTimeStamp = (timestamp) => {
   hour = hour < 10 ? '0' + hour : hour
   min = min < 10 ? '0' + min : min
   seconds = seconds < 10 ? '0' + seconds : seconds
-  return `${year}-${month}-${day} ${hour}:${min}:${seconds}`
+  // return `${year}-${month}-${day} ${hour}:${min}:${seconds}`
+  return `${year}-${month}-${day}`
 }
